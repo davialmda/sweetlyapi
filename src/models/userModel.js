@@ -1,7 +1,7 @@
-// "Banco" de usuários em memória
+// simulando um "banco de dados" // [até ter o banco de dados]
 const users = [];
 
-// Cria um novo usuário
+// criar um novo usuário
 const createUser = (user) => {
   const exists = users.find(u => u.email === user.email);
   if (exists) {
@@ -11,7 +11,7 @@ const createUser = (user) => {
   return user;
 };
 
-// Retorna todos os usuários
+// retorna todos os usuários
 const getUsers = () => users;
 
 module.exports = { createUser, getUsers };

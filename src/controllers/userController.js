@@ -1,27 +1,27 @@
 const { createUser, getUsers } = require('../models/userModel');
 
-// Cadastro
+// cadastro
 exports.registerUser = (req, res) => {
   const { name, email, password } = req.body;
 
-  // Verificar se os dados foram enviados
+  // verificar se os dados foram enviados
   if (!name || !email || !password) {
     return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
   }
 
-  // Tenta criar o usuário
+  // tenta criar o usuário
   const result = createUser({ name, email, password });
 
-  // Se houver erro ao criar o usuário (ex: email já cadastrado)
+  // se houver erro ao criar o usuário (ex: email já está cadastrado)
   if (result.error) {
     return res.status(409).json({ error: result.error });
   }
 
-  // Resposta de sucesso
+  // resposta de sucesso
   res.status(201).json({ message: 'Usuário criado com sucesso', user: result });
 };
 
-// Login
+// login
 exports.loginUser = (req, res) => {
   const { email, password } = req.body;
 

@@ -7,8 +7,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para processar JSON
-app.use(express.json());  // Aqui o Express vai ser capaz de entender os dados em JSON no corpo da requisição
+// middleware para processar o JSON
+app.use(express.json());  // o express entende os dados em JSON na requisição
 app.use(express.urlencoded({ extended: true }));
 
 // Rotas
