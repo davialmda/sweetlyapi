@@ -24,7 +24,7 @@ Usuário realiza login com usuário/email e senha. Validações das credenciais 
 
 ### US03 – Criar pedido de entrega
 Cliente cria pedido informando item e endereço com validação de dados.  
-![US03](US03(CRIAR PEDIDO).png)
+![US03](US03(CRIARPEDIDO).png)
 
 ### US04 – Listar meus pedidos
 Cliente visualiza todos os pedidos realizados e acompanha os status.  
@@ -53,4 +53,5 @@ Gerente exclui pedidos incorretos ou inválidos verificando se tem erros.
 ### US10 – Logs de alteração
 Gerente visualiza histórico de alterações e pode filtrar as informações presentes.  
 ![US10](US10(LOGS).png)
+
 
