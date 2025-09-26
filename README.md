@@ -6,6 +6,11 @@ Já pensou em um serviço _Delivery_ que entrega doces? Se sim, nós temos a sol
 O Sweetly é uma aplicação desenvolvida para os amantes de doces com as melhores sobremesas. Seja um Cookie, brigadeiro, açai, bolos, Sorvetes. Tudo focado em DOCES!
 ---
 
+## Notion
+
+![Notion](Notion.png)
+
+
 ## 🔧 Pré-requisitos  
 Antes de começar, certifique-se de ter instalado:  
 - ⚙️ **Node.js 18+** (inclui o **npm**)  
@@ -53,5 +58,6 @@ Gerente exclui pedidos incorretos ou inválidos verificando se tem erros.
 ### US10 – Logs de alteração
 Gerente visualiza histórico de alterações e pode filtrar as informações presentes.  
 ![US10](US10(LOGS).png)
+
 
 
