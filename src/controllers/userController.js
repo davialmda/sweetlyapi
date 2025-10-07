@@ -1,39 +1,71 @@
-const { createUser, getUsers } = require('../models/userModel');
+// Funções utilitárias que lidam com persistência e segurança de usuários.
+const {
+  createUser,
+  findUserByEmail,
+  verifyPassword,
+  sanitizeUser,
+} = require("../models/userModel");
 
-// cadastro
-exports.registerUser = (req, res) => {
+// Trata a requisição de cadastro de usuário.
+exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
-  // verificar se os dados foram enviados
+  // Validação básica para garantir que os campos obrigatórios chegaram.
   if (!name || !email || !password) {
-    return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    return res
+      .status(400)
+      .json({ error: "Todos os campos sao obrigatorios" });
   }
 
-  // tenta criar o usuário
-  const result = createUser({ name, email, password });
+  try {
+    // Tenta criar o usuário no banco; a função já aplica hash e valida domínio.
+    const result = await createUser({ name, email, password });
 
-  // se houver erro ao criar o usuário (ex: email já está cadastrado)
-  if (result.error) {
-    return res.status(409).json({ error: result.error });
+    if (result.error) {
+      return res.status(409).json({ error: result.error });
+    }
+
+    return res.status(201).json({
+      message: "Usuario criado com sucesso",
+      user: result.user,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Erro ao criar usuario" });
   }
-
-  // resposta de sucesso
-  res.status(201).json({ message: 'Usuário criado com sucesso', user: result });
 };
 
-// login
-exports.loginUser = (req, res) => {
+// Controla o processo de login a partir de email e senha.
+exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
+  // Se faltar dado, interrompe a autenticação com erro 400.
   if (!email || !password) {
-    return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+    return res
+      .status(400)
+      .json({ error: "Email e senha sao obrigatorios" });
   }
 
-  const user = getUsers().find(u => u.email === email && u.password === password);
+  try {
+    // Busca o usuário normalizando o email (lowercase e trim).
+    const user = await findUserByEmail(email);
 
-  if (!user) {
-    return res.status(401).json({ error: 'Email ou senha incorretos' });
+    if (!user) {
+      return res.status(401).json({ error: "Email ou senha incorretos" });
+    }
+
+    // Compara o hash da senha informada com o hash persistido.
+    const isValid = verifyPassword(password, user.passwordSalt, user.passwordHash);
+
+    if (!isValid) {
+      return res.status(401).json({ error: "Email ou senha incorretos" });
+    }
+
+    // Retorna somente os dados públicos (sem hash e salt).
+    return res.status(200).json({
+      message: "Login bem-sucedido",
+      user: sanitizeUser(user),
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Erro ao realizar login" });
   }
-
-  res.status(200).json({ message: 'Login bem-sucedido', user });
 };

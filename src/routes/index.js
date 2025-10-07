@@ -1,3 +1,4 @@
+// Router principal com endpoints de status/root.
 const express = require('express');
 const router = express.Router();
 

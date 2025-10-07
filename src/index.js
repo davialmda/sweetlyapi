@@ -1,27 +1,28 @@
+// Ponto de entrada do servidor Express.
 const express = require("express");
 const dotenv = require("dotenv");
-const routes = require("./routes/index.js"); // já deve existir
-const orderRoutes = require("./routes/orderRoutes"); // rotas de pedidos
-
-// importa a conexão com banco
+const routes = require("./routes/index.js");
+const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const sequelize = require("./config/database");
 
-// carrega variáveis de ambiente
+// Carrega variáveis do arquivo .env.
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// middlewares para processar JSON e formulário
+// Middlewares para ler JSON e dados de formulários.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// rotas
+// Organização das rotas principais.
 app.use("/", routes);
-app.use("/orders", orderRoutes); // novas rotas de pedidos
+app.use("/", userRoutes);
+app.use("/orders", orderRoutes);
 
-// sincroniza banco e inicia servidor
-sequelize.sync().then(() => {
+// Sincroniza os models e inicia o servidor HTTP.
+sequelize.sync({ alter: true }).then(() => {
   console.log("Banco sincronizado com sucesso!");
   app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
