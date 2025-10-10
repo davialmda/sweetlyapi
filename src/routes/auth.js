@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models/user');
+const db = require('../models/authDb');
 
 // Endpoint para cadastro de usuário
 router.post('/api/cadastro', (req, res) => {
