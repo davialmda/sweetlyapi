@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const routes = require("./routes/index.js");
 const userRoutes = require("./routes/userRoutes");
+const authRoutes = require('./routes/auth');
 const orderRoutes = require("./routes/orderRoutes");
 const sequelize = require("./config/database");
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // Organização das rotas principais.
 app.use("/", routes);
 app.use("/", userRoutes);
+app.use(authRoutes);
 app.use("/orders", orderRoutes);
 
 // Sincroniza os models e inicia o servidor HTTP.
