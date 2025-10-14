@@ -1,11 +1,10 @@
-// Camada de utilidades para lidar com hashing, validação e consultas de usuários.
+﻿// Camada de utilidades para lidar com hashing, validação e consultas de usuários.
 const crypto = require("crypto");
 const User = require("./user");
 
 const PBKDF2_ITERATIONS = 100000;
 const KEY_LENGTH = 64;
 const DIGEST = "sha512";
-const ALLOWED_EMAIL_DOMAINS = new Set(["gmail.com", "outlook.com", "yahoo.com"]);
 
 // Gera hash e salt para a senha informada utilizando PBKDF2.
 const hashPassword = (password) => {
@@ -41,28 +40,15 @@ const sanitizeUser = (userInstance) => {
   return user;
 };
 
-// Extrai o domínio de um endereço de email válido.
-const extractDomain = (email) => {
-  if (typeof email !== "string") {
-    return null;
-  }
-  const parts = email.split("@");
-  if (parts.length !== 2) {
-    return null;
-  }
-  return parts[1].toLowerCase();
-};
-
 // Normaliza o email para evitar duplicidades (lowercase + trim).
 const normalizeEmail = (email) => (typeof email === "string" ? email.trim().toLowerCase() : "");
 
 // Cria um novo usuário respeitando regras de domínio e unicidade.
 const createUser = async ({ name, email, password }) => {
   const normalizedEmail = normalizeEmail(email);
-  const domain = extractDomain(normalizedEmail);
 
-  if (!domain || !ALLOWED_EMAIL_DOMAINS.has(domain)) {
-    return { error: "Dominio de email nao suportado" };
+  if (!normalizedEmail || !normalizedEmail.includes("@")) {
+    return { error: "Email invalido" };
   }
 
   const existing = await User.findOne({ where: { email: normalizedEmail } });
@@ -71,14 +57,21 @@ const createUser = async ({ name, email, password }) => {
   }
 
   const { salt, hash } = hashPassword(password);
-  const created = await User.create({
-    name,
-    email: normalizedEmail,
-    passwordSalt: salt,
-    passwordHash: hash,
-  });
+  try {
+    const created = await User.create({
+      name,
+      email: normalizedEmail,
+      passwordSalt: salt,
+      passwordHash: hash,
+    });
 
-  return { user: sanitizeUser(created) };
+    return { user: sanitizeUser(created) };
+  } catch (error) {
+    if (error.name === "SequelizeValidationError") {
+      return { error: "Email invalido" };
+    }
+    throw error;
+  }
 };
 
 // Retorna uma lista de usuários sem dados sensíveis.
@@ -104,3 +97,5 @@ module.exports = {
   verifyPassword,
   sanitizeUser,
 };
+
+
