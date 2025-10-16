@@ -18,6 +18,7 @@ const normalizeCredentials = (req, _res, next) => {
 
 // Cadastro
 router.post("/register", registerUser);
+router.post("/user/register", registerUser);
 router.post("/api/cadastro", normalizeCredentials, registerUser);
 
 // Login
