@@ -102,3 +102,38 @@ exports.getOrdersByUser = async (req, res) => {
     return res.status(500).json({ error: "Erro ao listar pedidos do usuario" });
   }
 };
+
+// Aceitar o pedido do usuário
+exports.acceptOrder = async (req, res) => {
+    const { orderId } = req.params;
+    const authenticatedUserId = req.userId;
+    try {
+        // Busca o pedido que será aceito
+        const order = await Order.findByPk(orderId);
+
+        if (!order) {
+            return res.status(404).json({ error: "Pedido não encontrado." });
+        }
+        
+        // Verifica se o pedido já foi aceito
+        if (order.status !== 'pendente') {
+            return res.status(400).json({ error: `O pedido já está como ${order.status}.` });
+        }
+        
+        const updatedOrder = await order.update({
+            status: 'aceito', 
+            deliveryUserId: authenticatedUserId, 
+            acceptedAt: new Date()
+        });
+        
+        // Feedback do pedido
+        return res.status(200).json({ 
+            message: "Pedido aceito com sucesso!", 
+            order: updatedOrder 
+        });
+
+    } catch (error) {
+        console.error(`Erro ao aceitar pedido ${orderId}:`, error);
+        return res.status(500).json({ error: "Erro ao processar aceitação do pedido." });
+    }
+};
