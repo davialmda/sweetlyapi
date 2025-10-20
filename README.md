@@ -126,7 +126,7 @@ Modelo:
 
 Em ambos foram utilizadas técnicas de programação por pares. (Frontend e Backend)
 
-![ProgramacaoPar](docs/image/evidência2.png)
+![ProgramacaoPar](docs/image/evidência1.png)
 <>
 
 ---
@@ -179,4 +179,5 @@ CORS_ORIGIN=https://sweetlyapp.vercel.app
 4. Abra PR para `main` com checklist preenchido e links para issues/PRs relacionados.
 
 ---
+
 
