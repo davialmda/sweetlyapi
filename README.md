@@ -1,7 +1,7 @@
 # 🚀 Sweetly
 
 
-![Logo](docs/images/Logotipo.jpg)
+![Logo](docs/image/Logotipo.jpg)
 
 📦 Aplicativo de delivery de doces — disciplina: **Análise e Projeto de Software**
 
@@ -38,7 +38,7 @@ Sweetly é um MVP de delivery de doces com funcionalidades para clientes, entreg
 ## 2) Notion / Documentação
 https://www.notion.so/258918a4b98e80a8bbbde264db92fdfe?v=258918a4b98e8075b38c000cdae19a43&source=copy_link
 
-![Notion](docs/images/notion03.png)
+![Notion](docs/image/notion03.png)
 
 ---
 
@@ -69,7 +69,7 @@ Antes de começar, instale:
 
 ## 5) Diagrama de arquitetura:
 
-![Arquiteura](docs/images/diagramadearquitetura.png)
+![Arquiteura](docs/image/diagramadearquitetura.png)
 
 ---
 
@@ -108,7 +108,7 @@ Modelo:
   2. Preencher nome, email, senha
   3. Submeter formulário
   Resultado: OK  
-  Screencast: ![Screencast](docs/images/MicrosoftTeams-video.mp4)
+  Screencast: ![Screencast](docs/image/MicrosoftTeams-video.mp4)
 
 - Teste: Login  
   Data: <07/10>  
@@ -117,7 +117,7 @@ Modelo:
    2. preencher e-mail e senha;
    3. entrar
   Resultado: OK
-  Screencast: ![Screencast](docs/images/MicrosoftTeams-video.mp4)
+  Screencast: ![Screencast](docs/image/MicrosoftTeams-video.mp4)
 
 
 ---
@@ -126,7 +126,7 @@ Modelo:
 
 Em ambos foram utilizadas técnicas de programação por pares. (Frontend e Backend)
 
-![ProgramacaoPar](docs/images/evidência2.png)
+![ProgramacaoPar](docs/image/evidência2.png)
 <>
 
 ---
@@ -179,3 +179,4 @@ CORS_ORIGIN=https://sweetlyapp.vercel.app
 4. Abra PR para `main` com checklist preenchido e links para issues/PRs relacionados.
 
 ---
+
