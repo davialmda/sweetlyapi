@@ -1,63 +1,181 @@
-# 🚀 Sweetly 
-📦 Aplicativo de entregas de doce da disciplina **Análise e Projeto de Software** 
-
-Já pensou em um serviço _Delivery_ que entrega doces? Se sim, nós temos a solução perfeita!
-
-O Sweetly é uma aplicação desenvolvida para os amantes de doces com as melhores sobremesas. Seja um Cookie, brigadeiro, açai, bolos, Sorvetes. Tudo focado em DOCES!
----
-
-## Notion
-
-![Notion](Notion.png)
+# 🚀 Sweetly
 
 
-## 🔧 Pré-requisitos  
-Antes de começar, certifique-se de ter instalado:  
-- ⚙️ **Node.js 18+** (inclui o **npm**)  
-- 📦 **npm** (já vem junto com o Node.js) ou, se preferir, **Yarn** como gerenciador de pacotes  
-- 🖥️ **Git** (para clonar e versionar o projeto)
+![Logo](docs/images/Logotipo.jpg)
+
+📦 Aplicativo de delivery de doces — disciplina: **Análise e Projeto de Software**
+
+Já pensou em um serviço Delivery especializado em doces? O Sweetly é uma aplicação para quem ama sobremesas: cookies, brigadeiros, açaí, bolos, sorvetes e muito mais.
+
+
 
 ---
 
-### US01 – Cadastro de usuário
-Usuário cadastra informando nome, email e senha. Validações de dados e email existente incluídas.  
-![US01](US01(CADASTRO).png)
+## Índice
+- 1) Visão rápida
+- 2) Notion / Documentação
+- 3) Pré-requisitos
+- 4) Como rodar localmente
+- 5) Diagrama de arquitetura
+- 6) Evidências da Entrega 01 (checklist)
+- 7) Testes de sistema
+- 8) Programação em par
+- 9) Deployment
+- 10) Atualizando este README
+- 11) Contato
 
-### US02 – Login no sistema
-Usuário realiza login com usuário/email e senha. Validações das credenciais incorretas incluídas.  
-![US02](US02(LOGIN).png)
+---
 
-### US03 – Criar pedido de entrega
-Cliente cria pedido informando item e endereço com validação de dados.  
-![US03](US03(CRIARPEDIDO).png)
+## 1) Visão rápida
+Sweetly é um MVP de delivery de doces com funcionalidades para clientes, entregadores e gerentes das confeiterias:
+- Cadastro e login de usuários
+- Criação e acompanhamento de pedidos
+- Painel de entregadores para visualizar e aceitar pedidos
+- Painel de gerente para gerenciar usuários, pedidos e logs
 
-### US04 – Listar meus pedidos
-Cliente visualiza todos os pedidos realizados e acompanha os status.  
-![US04](US04(LISTARPEDIDOS).png)
+---
 
-### US05 – Ver pedidos disponíveis
-Entregador visualiza os pedidos pendentes para escolher qual pretende aceitar.  
-![US05](US05(VERPEDIDOS).png)
+## 2) Notion / Documentação
+https://www.notion.so/258918a4b98e80a8bbbde264db92fdfe?v=258918a4b98e8075b38c000cdae19a43&source=copy_link
 
-### US06 – Aceitar pedido
-Entregador aceita o pedido para realizar entrega.  
-![US06](US06(ACEITARPEDIDO).png)
+![Notion](docs/images/notion03.png)
 
-### US07 – Marcar pedido como entregue
-Entregador finaliza entrega e atualiza status do pedido.  
-![US07](US07(ENTREGUE).png)
+---
 
-### US08 – Gerenciar usuários
-Gerente visualiza lista de usuários e detalhes.  
-![US08](US08(GERENCIARUSUARIOS).png)
+## 3) Pré-requisitos
+Antes de começar, instale:
+- Node.js 18+ (vem com npm)
+- npm ou Yarn
+- Git
 
-### US09 – Excluir pedido
-Gerente exclui pedidos incorretos ou inválidos verificando se tem erros.  
-![US09](US09(EXCLUIRPEDIDO).png)
+---
 
-### US10 – Logs de alteração
-Gerente visualiza histórico de alterações e pode filtrar as informações presentes.  
-![US10](US10(LOGS).png)
+## 4) Como rodar localmente
+1. Clone o repositório:
+   git clone https://github.com/davialmda/sweetlyapp.git
+2. Entre na pasta e instale dependências:
+   cd sweetlyapp
+   npm install
+3. Rodar em modo de desenvolvimento:
+   npm run dev
+4. Build para produção:
+   npm run build
+5. Variáveis de ambiente:
+   - REACT_APP_API_URL (exemplo)
+   - OUTRAS_VARS (exemplo)
+(Atualize conforme o projeto)
+
+---
+
+## 5) Diagrama de arquitetura:
+
+![Arquiteura](docs/images/diagramadearquitetura.png)
+
+---
+
+## 6) Evidências da Entrega 03 — Checklist 
+Data da entrega: 21/10
+
+- [✅] Seleção de histórias para implementar (pelo menos 3) — listar aqui as US escolhidas e marcar as implementadas
+  - Histórias escolhidas nesta entrega: US01: Cadastro de usuário, US02: Login no sistema, US03: Criar pedido de entrega 
+- [✅] Criação de Sprint no Notion 
+  - Quadro Notion: <https://www.notion.so/US03-Criar-pedido-de-entrega-258918a4b98e80a78416db40925d06f7?source=copy_link>
+  - Sprint: Sprint 01 — início: 29/09 — fim: <07/10>
+- [✅] Atualização do diagrama de atividades 
+  - Nota: descreva rapidamente as principais mudanças
+- [✅] Ambiente de versionamento atuante
+  - Evidência: `docs/commits-weekly.png`
+- [✅] Deployment das novas histórias — URL pública do deploy + screencast
+  - URL do deploy: <INSERIR_URL_DO_DEPLOY>
+  - Screencast principal: <INSERIR_URL_DO_VÍDEO>
+- [✅] Issue / bug tracker atualizado
+- [✅] Testes de Sistema 
+  - Relatório: 
+  - Screencasts: 
+- [✅] Programação em par 
+- [✅] Quadro da Sprint 01 atualizado refletindo a entrega 
+
+---
 
 
+## 7) Testes de sistema (modelo de relatório)
 
+Modelo:
+- Teste: Cadastro de Usuário  
+  Data: <07/10>  
+  Passos:
+  1. Abrir página /signup
+  2. Preencher nome, email, senha
+  3. Submeter formulário
+  Resultado: OK  
+  Screencast: ![Screencast](docs/images/MicrosoftTeams-video.mp4)
+
+- Teste: Login  
+  Data: <07/10>  
+  Passos:
+   1. Abrir página / login
+   2. preencher e-mail e senha;
+   3. entrar
+  Resultado: OK
+  Screencast: ![Screencast](docs/images/MicrosoftTeams-video.mp4)
+
+
+---
+
+## 9) Programação em par (Pair Programming)
+
+Em ambos foram utilizadas técnicas de programação por pares. (Frontend e Backend)
+
+![ProgramacaoPar](docs/images/evidência2.png)
+<>
+
+---
+
+## 10) Deployment
+- Plataforma sugerida: 
+- URL do deploy: 
+- Instruções:
+Use este arquivo como referência e mantenha o README apontando para as URLs de deploy (Front-end e API).
+
+---
+
+##  Variáveis de Ambiente
+
+As variáveis abaixo são exemplos. Ajuste os valores conforme o seu projeto.
+
+### 1.1 Back-end (sweetlyapi)
+- NODE_ENV: production
+- PORT: 5000 (ou o que a plataforma fornecer)
+- DATABASE_URL: string de conexão do banco (se aplicável)
+- JWT_SECRET: chave secreta para tokens
+- CORS_ORIGIN: origem permitida (ex.: https://sweetlyapp.vercel.app)
+
+Arquivo: .env (desenvolvimento local)
+NODE_ENV=development
+PORT=5000
+DATABASE_URL=postgres://user:pass@localhost:5432/sweetly
+JWT_SECRET=troque-esta-chave
+CORS_ORIGIN=http://localhost:5173
+
+Arquivo: .env.production (produção)
+NODE_ENV=production
+PORT=10000
+DATABASE_URL=<URL_DE_PRODUCAO>
+JWT_SECRET=<SEGREDO_FORTE>
+CORS_ORIGIN=https://sweetlyapp.vercel.app
+
+---
+
+---
+
+## 11) Como atualizar esse README
+1. Adicione/atualize imagens e vídeos em `docs/` conforme a estrutura sugerida.
+2. Substitua os placeholders `<INSERIR_...>` por links ou paths reais.
+3. Commit e push:
+   - git checkout -b feature/docs-sprint01
+   - git add README.md docs/
+   - git commit -m "docs(sprint01): evidências Entrega 03"
+   - git push origin feature/docs-sprint01
+4. Abra PR para `main` com checklist preenchido e links para issues/PRs relacionados.
+
+---
