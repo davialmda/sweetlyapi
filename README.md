@@ -96,6 +96,7 @@ Data da entrega: 21/10
 - [✅] Quadro da Sprint 01 atualizado refletindo a entrega 
 
 ---
+<<<<<<< HEAD
 
 
 ## 7) Testes de sistema (modelo de relatório)
@@ -188,6 +189,90 @@ CORS_ORIGIN=https://sweetlyapp.vercel.app
 4. Abra PR para `main` com checklist preenchido e links para issues/PRs relacionados.
 
 ---
+=======
+>>>>>>> origin/testes
 
+
+## 7) Testes de sistema (modelo de relatório)
+
+Modelo:
+- Teste: Cadastro de Usuário  
+  Data: <07/10>  
+  Passos:
+  1. Abrir página /signup
+  2. Preencher nome, email, senha
+  3. Submeter formulário
+  Resultado: OK  
+  Screencast: ![Screencast](docs/image/MicrosoftTeams-video.mp4)
+
+- Teste: Login  
+  Data: <07/10>  
+  Passos:
+   1. Abrir página / login
+   2. preencher e-mail e senha;
+   3. entrar
+  Resultado: OK
+  Screencast: ![Screencast](docs/image/MicrosoftTeams-video.mp4)
+
+
+---
+
+## 9) Programação em par (Pair Programming)
+
+Em ambos foram utilizadas técnicas de programação por pares. (Frontend e Backend)
+
+![ProgramacaoPar](docs/image/evidência1.png)
+<>
+
+---
+
+## 10) Deployment
+- Plataforma sugerida: 
+- URL do deploy: 
+- Instruções:
+Use este arquivo como referência e mantenha o README apontando para as URLs de deploy (Front-end e API).
+
+---
+
+##  Variáveis de Ambiente
+
+As variáveis abaixo são exemplos. Ajuste os valores conforme o seu projeto.
+
+### 1.1 Back-end (sweetlyapi)
+- NODE_ENV: production
+- PORT: 5000 (ou o que a plataforma fornecer)
+- DATABASE_URL: string de conexão do banco (se aplicável)
+- JWT_SECRET: chave secreta para tokens
+- CORS_ORIGIN: origem permitida (ex.: https://sweetlyapp.vercel.app)
+
+Arquivo: .env (desenvolvimento local)
+NODE_ENV=development
+PORT=5000
+DATABASE_URL=postgres://user:pass@localhost:5432/sweetly
+JWT_SECRET=troque-esta-chave
+CORS_ORIGIN=http://localhost:5173
+
+Arquivo: .env.production (produção)
+NODE_ENV=production
+PORT=10000
+DATABASE_URL=<URL_DE_PRODUCAO>
+JWT_SECRET=<SEGREDO_FORTE>
+CORS_ORIGIN=https://sweetlyapp.vercel.app
+
+---
+
+---
+
+## 11) Como atualizar esse README
+1. Adicione/atualize imagens e vídeos em `docs/` conforme a estrutura sugerida.
+2. Substitua os placeholders `<INSERIR_...>` por links ou paths reais.
+3. Commit e push:
+   - git checkout -b feature/docs-sprint01
+   - git add README.md docs/
+   - git commit -m "docs(sprint01): evidências Entrega 03"
+   - git push origin feature/docs-sprint01
+4. Abra PR para `main` com checklist preenchido e links para issues/PRs relacionados.
+
+---
 
 

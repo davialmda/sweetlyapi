@@ -27,6 +27,11 @@ const Order = sequelize.define("Order", {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   },
+  status: {
+    type: DataTypes.ENUM('pendente', 'em_andamento', 'entregue'),
+    allowNull: false,
+    defaultValue: 'pendente',
+  },
 });
 
 // Cria os relacionamentos bidirecionais entre pedidos e usuários.

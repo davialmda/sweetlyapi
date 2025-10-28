@@ -22,3 +22,13 @@ router.post("/accept", orderController.acceptOrder);
 
 module.exports = router;
 
+const express = require("express");
+const router = express.Router();
+const orderController = require("../controllers/orderController");
+
+// outras rotas...
+router.post("/entregar/:orderId", orderController.markAsDelivered);
+
+module.exports = router;
+
+
