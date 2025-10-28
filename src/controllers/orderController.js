@@ -138,3 +138,37 @@ exports.acceptOrder = async (req, res) => {
     return res.status(500).json({ error: "Erro ao aceitar pedido" });
   }
 };
+
+// Marcar o pedido como entregue
+exports.markAsDelivered = async (req, res) => {
+  try {
+    const { orderId } = req.params; // o ID virá pela URL, ex: /orders/entregar/5
+    const id = Number(orderId);
+ 
+    if (!Number.isInteger(id) || id <= 0) {
+      return res.status(400).json({ error: "ID de pedido inválido" });
+    }
+ 
+    // Busca o pedido no banco
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({ error: "Pedido não encontrado" });
+    }
+ 
+    // Verifica se ele já foi entregue
+    if (order.status === "entregue") {
+      return res.status(400).json({ error: "Pedido já foi entregue" });
+    }
+ 
+    // Atualiza o status e salva
+    order.status = "entregue";
+    await order.save();
+ 
+    return res.json({
+      message: "Pedido marcado como entregue com sucesso",
+      order,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Erro ao marcar pedido como entregue" });
+  }
+};
