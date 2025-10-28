@@ -139,36 +139,38 @@ exports.acceptOrder = async (req, res) => {
   }
 };
 
-// Marcar o pedido como entregue
+// Marca um pedido como entregue e finaliza a tarefa do entregador.
 exports.markAsDelivered = async (req, res) => {
+  const { orderId } = req.params;
+  const orderIdValue = Number(orderId);
+
+  if (!Number.isInteger(orderIdValue) || orderIdValue <= 0) {
+    return res.status(400).json({ error: "ID do pedido invalido" });
+  }
+
   try {
-    const { orderId } = req.params; // o ID virá pela URL, ex: /orders/entregar/5
-    const id = Number(orderId);
- 
-    if (!Number.isInteger(id) || id <= 0) {
-      return res.status(400).json({ error: "ID de pedido inválido" });
-    }
- 
-    // Busca o pedido no banco
-    const order = await Order.findByPk(id);
+    const order = await Order.findByPk(orderIdValue, {
+      include: [{
+        association: "user",
+        attributes: ["id", "name", "email"],
+      }],
+    });
+
     if (!order) {
-      return res.status(404).json({ error: "Pedido não encontrado" });
+      return res.status(404).json({ error: "Pedido nao encontrado" });
     }
- 
-    // Verifica se ele já foi entregue
-    if (order.status === "entregue") {
-      return res.status(400).json({ error: "Pedido já foi entregue" });
+
+    if (order.status !== "em_andamento") {
+      return res.status(400).json({ error: "Pedido deve estar em andamento para ser finalizado" });
     }
- 
-    // Atualiza o status e salva
-    order.status = "entregue";
-    await order.save();
- 
-    return res.json({
+
+    await order.update({ status: "entregue" });
+
+    return res.status(200).json({
       message: "Pedido marcado como entregue com sucesso",
-      order,
+      order: order.toJSON(),
     });
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao marcar pedido como entregue" });
+    return res.status(500).json({ error: "Erro ao finalizar pedido" });
   }
 };
