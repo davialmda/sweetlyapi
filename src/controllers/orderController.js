@@ -138,3 +138,39 @@ exports.acceptOrder = async (req, res) => {
     return res.status(500).json({ error: "Erro ao aceitar pedido" });
   }
 };
+
+// Marca um pedido como entregue e finaliza a tarefa do entregador.
+exports.markAsDelivered = async (req, res) => {
+  const { orderId } = req.params;
+  const orderIdValue = Number(orderId);
+
+  if (!Number.isInteger(orderIdValue) || orderIdValue <= 0) {
+    return res.status(400).json({ error: "ID do pedido invalido" });
+  }
+
+  try {
+    const order = await Order.findByPk(orderIdValue, {
+      include: [{
+        association: "user",
+        attributes: ["id", "name", "email"],
+      }],
+    });
+
+    if (!order) {
+      return res.status(404).json({ error: "Pedido nao encontrado" });
+    }
+
+    if (order.status !== "em_andamento") {
+      return res.status(400).json({ error: "Pedido deve estar em andamento para ser finalizado" });
+    }
+
+    await order.update({ status: "entregue" });
+
+    return res.status(200).json({
+      message: "Pedido marcado como entregue com sucesso",
+      order: order.toJSON(),
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Erro ao finalizar pedido" });
+  }
+};
