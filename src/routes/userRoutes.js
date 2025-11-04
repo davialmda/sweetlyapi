@@ -1,7 +1,7 @@
-// Rotas de autenticação (cadastro e login).
+// Rotas de autenticação (cadastro e login) e rotas de usuário.
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser } = require("../controllers/userController");
+const { registerUser, loginUser, listAllUsers } = require("../controllers/userController");
 
 // Converte payloads legados (nome/senha) para o formato atual (name/password).
 const normalizeCredentials = (req, _res, next) => {
@@ -16,7 +16,7 @@ const normalizeCredentials = (req, _res, next) => {
   next();
 };
 
-// Cadastro
+// Cadastro (mantendo endpoints legados compatíveis)
 router.post("/register", registerUser);
 router.post("/user/register", registerUser);
 router.post("/api/cadastro", normalizeCredentials, registerUser);
@@ -25,4 +25,8 @@ router.post("/api/cadastro", normalizeCredentials, registerUser);
 router.post("/login", loginUser);
 router.post("/api/login", normalizeCredentials, loginUser);
 
+// rota da US08 — listar todos os usuários
+router.get("/", listAllUsers);
+
 module.exports = router;
+
