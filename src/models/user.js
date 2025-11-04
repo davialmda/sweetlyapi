@@ -9,6 +9,10 @@ const User = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [2, 100],
+        notEmpty: true,
+      },
     },
     // Email único, validado pelo Sequelize antes de salvar.
     email: {

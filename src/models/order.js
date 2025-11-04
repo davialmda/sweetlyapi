@@ -8,14 +8,26 @@ const Order = sequelize.define("Order", {
   item: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      len: [1, 255],
+      notEmpty: true,
+    },
   },
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    validate: {
+      min: 1,
+      max: 1000,
+    },
   },
   address: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      len: [5, 500],
+      notEmpty: true,
+    },
   },
   userId: {
     type: DataTypes.INTEGER,
