@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const routes = require("./routes/index.js");
 const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const logRoutes = require("./routes/logRoutes");
 const sequelize = require("./config/database");
 
 // Carrega variáveis do arquivo .env.
@@ -64,6 +65,7 @@ app.use((req, res, next) => {
 app.use("/", routes);
 app.use("/", userRoutes);
 app.use("/orders", orderRoutes);
+app.use("/logs", logRoutes);
 
 // Sincroniza os models e inicia o servidor HTTP.
 sequelize.sync({ alter: true })

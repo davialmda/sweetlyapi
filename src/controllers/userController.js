@@ -1,4 +1,4 @@
-// Funções utilitárias que lidam com persistência e segurança de usuários.
+// Funções utilitárias que lidam with persistência e segurança de usuários.
 const {
   createUser,
   findUserByEmail,
@@ -6,6 +6,7 @@ const {
   sanitizeUser,
   getUsers,
 } = require("../models/userModel");
+const { createLog } = require("./logController");
 
 // Trata a requisição de cadastro de usuário.
 exports.registerUser = async (req, res) => {
@@ -34,6 +35,16 @@ exports.registerUser = async (req, res) => {
     if (result.error) {
       return res.status(409).json({ error: result.error });
     }
+
+    // Registra log da criação do usuário
+    await createLog(
+      'CREATE',
+      'User',
+      result.user.id,
+      `Usuário ${result.user.name} foi criado`,
+      null,
+      req.ip || req.connection.remoteAddress
+    );
 
     return res.status(201).json({
       message: "Usuario criado com sucesso",
@@ -71,6 +82,16 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ error: "Email ou senha incorretos" });
     }
 
+    // Registra log do login
+    await createLog(
+      'LOGIN',
+      'User',
+      user.id,
+      `Usuário ${user.name} fez login`,
+      user.id,
+      req.ip || req.connection.remoteAddress
+    );
+
     // Retorna somente os dados públicos (sem hash e salt).
     return res.status(200).json({
       message: "Login bem-sucedido",
@@ -90,6 +111,16 @@ exports.listAllUsers = async (req, res) => {
     if (!users || users.length === 0) {
       return res.status(404).json({ message: "Nenhum usuário encontrado" });
     }
+
+    // Registra log da consulta de usuários
+    await createLog(
+      'VIEW',
+      'User',
+      null,
+      'Lista de usuários foi consultada',
+      null,
+      req.ip || req.connection.remoteAddress
+    );
 
     return res.status(200).json(users);
   } catch (error) {

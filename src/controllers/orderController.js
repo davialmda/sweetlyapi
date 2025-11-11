@@ -1,6 +1,7 @@
 // Interações de pedidos dependem do model Order e dos dados públicos do usuário.
 const Order = require("../models/order");
 const { findUserById, sanitizeUser } = require("../models/userModel");
+const { createLog } = require("./logController");
 
 // Cria um pedido já vinculado a um usuário existente.
 exports.createOrder = async (req, res) => {
@@ -50,6 +51,16 @@ exports.createOrder = async (req, res) => {
       address: deliveryAddress,
       userId: userIdValue,
     });
+
+    // Registra log da criação do pedido
+    await createLog(
+      'CREATE',
+      'Order',
+      order.id,
+      `Pedido ${order.id} criado - Item: ${order.item}`,
+      userIdValue,
+      req.ip || req.connection.remoteAddress
+    );
 
     return res.status(201).json({
       message: "Pedido criado com sucesso",
@@ -141,6 +152,16 @@ exports.acceptOrder = async (req, res) => {
 
     await order.update({ status: "em_andamento" });
 
+    // Registra log da aceitação do pedido
+    await createLog(
+      'UPDATE',
+      'Order',
+      orderIdValue,
+      `Pedido ${orderIdValue} foi aceito`,
+      null,
+      req.ip || req.connection.remoteAddress
+    );
+
     return res.status(200).json({
       message: "Pedido aceito com sucesso",
       order: order.toJSON(),
@@ -177,6 +198,16 @@ exports.markAsDelivered = async (req, res) => {
     }
 
     await order.update({ status: "entregue" });
+
+    // Registra log da finalização do pedido
+    await createLog(
+      'UPDATE',
+      'Order',
+      orderIdValue,
+      `Pedido ${orderIdValue} foi marcado como entregue`,
+      null,
+      req.ip || req.connection.remoteAddress
+    );
 
     return res.status(200).json({
       message: "Pedido marcado como entregue com sucesso",
