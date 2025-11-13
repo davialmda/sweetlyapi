@@ -6,7 +6,8 @@ const {
   getOrders,
   getOrdersByUser,
   acceptOrder,
-  markAsDelivered
+  markAsDelivered,
+  deleteOrder
 } = require("../controllers/orderController");
 
 router.post("/create", createOrder);
@@ -14,14 +15,6 @@ router.get("/", getOrders);
 router.get("/user/:userId", getOrdersByUser);
 router.put("/:orderId/accept", acceptOrder);
 router.put("/:orderId/complete", markAsDelivered);
-
-module.exports = router;
-
-const express = require("express");
-const router = express.Router();
-const orderController = require("../controllers/orderController");
-
-// Rota para excluir pedido
-router.delete("/:id", orderController.deleteOrder);
+router.delete("/:id", deleteOrder);
 
 module.exports = router;

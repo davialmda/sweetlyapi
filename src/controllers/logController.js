@@ -18,7 +18,7 @@ const createLog = async (action, entity, entityId, details, userId, ipAddress) =
 };
 
 // US10 - Lista todos os logs de alterações para o gerente
-exports.getLogs = async (req, res) => {
+const getLogs = async (req, res) => {
   try {
     const { page = 1, limit = 50, action, entity } = req.query;
     const offset = (page - 1) * limit;
@@ -55,7 +55,7 @@ exports.getLogs = async (req, res) => {
   }
 };
 
-// Exporta função utilitária para uso em outros controllers
+// Exporta funções para uso em outros controllers
 module.exports = {
   getLogs,
   createLog,
